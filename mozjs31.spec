@@ -1,8 +1,8 @@
-%global		pre_release		.rc0
-%define pkgname 		mozjs
-%define api                     31.2
-%define libmozjs31              %mklibname %{pkgname} %{api}
-%define libmozjs31_devel        %mklibname %{pkgname} %{api} -d
+%global pre_release .rc0
+%define pkgname mozjs
+%define api 31.2
+%define libmozjs31 %mklibname %{pkgname} %{api}
+%define libmozjs31_devel %mklibname %{pkgname} %{api} -d
 
 Summary:	JavaScript interpreter and libraries
 Name:		mozjs31
@@ -31,8 +31,8 @@ super set of the ECMA-262 Edition 3 (ECMAScript) standard scripting language,
 with only mild differences from the published standard.
 
 %package -n %{libmozjs31}
-Provides:       mozjs31 = %{EVRD}
-Summary:        JavaScript engine library
+Provides:	mozjs31 = %{EVRD}
+Summary:	JavaScript engine library
 
 %description -n %{libmozjs31}
 JavaScript is the Netscape-developed object scripting language used in millions
@@ -41,9 +41,9 @@ super set of the ECMA-262 Edition 3 (ECMAScript) standard scripting language,
 with only mild differences from the published standard.
 
 %package -n %{libmozjs31_devel}
-Summary: Header files, libraries and development documentation for %{name}
-Provides:       mozjs31-devel = %{EVRD}
-Requires: %{libmozjs31} = %{EVRD}
+Summary:	Header files, libraries and development documentation for %{name}
+Provides:	mozjs31-devel = %{EVRD}
+Requires:	%{libmozjs31} = %{EVRD}
 
 %description -n %{libmozjs31_devel}
 This package contains the header files, static libraries and development
@@ -63,7 +63,7 @@ export CXXFLAGS="$CFLAGS"
 export CC=gcc
 export CXX=g++
 
-%configure2_5x \
+%configure \
 	--with-system-nspr \
 	--enable-threadsafe \
 	--enable-readline \
@@ -76,7 +76,7 @@ export CXX=g++
 	--with-system-icu \
 	--without-intl-api
 # Not build smp safe
-make
+%make -j1
 
 %install
 %makeinstall_std
@@ -100,15 +100,10 @@ cp -p js/src/js-config.h %{buildroot}%{_includedir}/mozjs-31
 # Some tests will fail
 tests/jstests.py -d -s --no-progress ../../js/src/js/src/shell/js || :
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
-
-%files -n %{libmozjs31}
-%doc ../../LICENSE ../../README
+files -n %{libmozjs31}
 %{_libdir}/*.so
 
 %files -n %{libmozjs31_devel}
+%doc ../../LICENSE ../../README
 %{_libdir}/pkgconfig/*.pc
 %{_includedir}/mozjs-31
-
