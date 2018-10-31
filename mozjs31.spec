@@ -7,7 +7,7 @@
 Summary:	JavaScript interpreter and libraries
 Name:		mozjs31
 Version:	31.2.0
-Release:	2
+Release:	3
 License:	MPLv2.0 and BSD and GPLv2+ and GPLv3+ and LGPLv2.1 and LGPLv2.1+
 URL:		https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Releases/31
 Source0:	https://people.mozilla.org/~sstangl/mozjs-%{version}%{pre_release}.tar.bz2
