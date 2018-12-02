@@ -106,7 +106,7 @@ cp -p js/src/js-config.h %{buildroot}%{_includedir}/mozjs-31
 # Some tests will fail
 #tests/jstests.py -d -s --no-progress ../../js/src/js/src/shell/js || :
 
-files -n %{libmozjs31}
+%files -n %{libmozjs31}
 %{_libdir}/*.so
 
 %files -n %{libmozjs31_devel}
