@@ -17,7 +17,7 @@ BuildRequires:	pkgconfig(libffi)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	readline-devel
 BuildRequires:	zip
-BuildRequires:	python
+BuildRequires:	python2
 
 # Patches from 0ad
 Patch0:		FixForOfBailouts.diff
@@ -57,6 +57,12 @@ you will need to install %{name}-devel.
 %patch2 -p3
 
 %build
+
+mkdir pybin
+ln -s %{_bindir}/python2 pybin/python
+export QTDIR=/usr
+export PATH=`pwd`/pybin:$PATH
+
 # Need -fpermissive due to some macros using nullptr as bool false
 export CFLAGS="%{optflags} -fpermissive"
 export CXXFLAGS="$CFLAGS"
